@@ -12,7 +12,7 @@ pipeline {
       }
     }
    stage('Checkpoint') {
-         agent none
+         agent any
          steps {
             checkpoint 'Checkpoint'
          }
