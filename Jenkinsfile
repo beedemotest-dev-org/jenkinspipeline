@@ -4,20 +4,24 @@ pipeline {
   }
   stages {
     stage('Say Hello') {
-      parallel {
-        stage('Say Hello') {
-          steps {
-            echo "Hello ${params.Name}!"
-            echo "${TEST_USER_USR}"
-            echo "${TEST_USER_PSW}"
-            sh 'java -version'
-          }
-        }
+      steps {
+        echo "Hello ${params.Name}!"
+        sh 'java -version'
+        echo "${TEST_USER_USR}"
+        echo "${TEST_USER_PSW}"
+      }
+    }
+    stage('Deploy') {
+      input {
+        message 'Should we continue?'
+      }
+      steps {
+        echo 'Continuing with deployment'
       }
     }
   }
   environment {
-    MY_NAME = 'Pedro'
+    MY_NAME = 'Mary'
     TEST_USER = credentials('test-user')
   }
   parameters {
